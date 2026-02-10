@@ -14,10 +14,10 @@ class StockInController extends Controller
     public function index()
     {
         $title = 'Barang Masuk';
-        $data = StockIn::with('product')->latest()->get();
-        // return view('stock_in.index', compact('data', 'title'));
+        $stockIns = StockIn::with('product')->latest()->get();
+        $products = Product::all();
+        return view('stock_in.index', compact('stockIns', 'title', 'products'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -36,6 +36,7 @@ class StockInController extends Controller
         $request->validate([
             'product_id' => 'required',
             'qty' => 'required|integer|min:1',
+            'reference_no' => 'required|string|max:225',
             'date' => 'required|date',
             'note' => 'nullable|string|max:225'
         ]);
@@ -46,7 +47,7 @@ class StockInController extends Controller
         $product = Product::find($request->product_id);
         $product->increment('stock', $request->qty);
 
-        return redirect()->route('transaction.index')
+        return redirect()->route('stock_in.index')
             ->with('success', 'Barang masuk berhasil');
     }
 

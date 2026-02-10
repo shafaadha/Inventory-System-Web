@@ -14,8 +14,9 @@ class StockOutController extends Controller
     public function index()
     {
         $title = 'Barang Keluar';
-        $data = StockOut::with('product')->latest()->get();
-        return view('stock_out.index', compact('data', 'title'));
+        $stockOuts = StockOut::with('product')->latest()->get();
+        $products = Product::all();
+        return view('stock_out.index', compact('stockOuts', 'title', 'products'));
     }
 
     /**
@@ -36,6 +37,7 @@ class StockOutController extends Controller
         $request->validate([
             'product_id' => 'required',
             'qty' => 'required|integer|min:1',
+            'reference_no' => 'required|string|max:225',
             'date' => 'required|date',
             'note' => 'nullable|string|max:225'
         ]);
@@ -49,7 +51,7 @@ class StockOutController extends Controller
         StockOut::create($request->all());
 
         $product->decrement('stock', $request->qty);
-        return redirect()->route('transcation.index')
+        return redirect()->route('stock_out.index')
             ->with('success', 'Barang keluar berhasil');
     }
 

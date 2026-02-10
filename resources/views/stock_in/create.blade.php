@@ -65,7 +65,7 @@
 
             {{-- Button --}}
             <div class="flex justify-end gap-2">
-                <a href="{{ route('stock-in.index') }}" class="px-4 py-2 rounded-md border text-gray-600 hover:bg-gray-100">
+                <a href="{{ route('stock_in.index') }}" class="px-4 py-2 rounded-md border text-gray-600 hover:bg-gray-100">
                     Batal
                 </a>
 

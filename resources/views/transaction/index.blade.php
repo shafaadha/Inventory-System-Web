@@ -7,7 +7,7 @@
         {{-- BARANG MASUK --}}
         <div class="flex flex-row justify-between">
             <h2 class="font-semibold mb-2">Barang Masuk</h2>
-            <a href="{{ route('stock-in.create') }}"
+            <a href="{{ route('stock_in.create') }}"
                 class="inline-block mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                 + Tambah Stock
             </a>
