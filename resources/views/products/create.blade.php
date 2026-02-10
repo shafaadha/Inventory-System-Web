@@ -19,25 +19,49 @@
 
             <div>
                 <label class="block font-medium mb-1">Kode Produk</label>
-                <input type="text" name="code" value="{{ old('code') }}"
+                <input type="text" name="code" value="{{ old('code') }}" required placeholder="Contoh: PRD-001"
                     class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Nama Produk</label>
-                <input type="text" name="name" value="{{ old('name') }}"
+                <input type="text" name="name" value="{{ old('name') }}" required
+                    placeholder="Contoh: Gula Pasir 1Kg"
                     class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
             </div>
 
             <div>
+                <label class="block font-medium mb-1">Deskripsi</label>
+                <textarea name="description" rows="3" placeholder="Deskripsi produk (opsional)"
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">{{ old('description') }}</textarea>
+            </div>
+
+            <div>
                 <label class="block font-medium mb-1">Satuan</label>
-                <input type="text" name="unit" value="{{ old('unit') }}"
+                <input type="text" name="unit" value="{{ old('unit') }}" required
+                    placeholder="Contoh: pcs / box / kg"
                     class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Stok Awal</label>
-                <input type="number" name="stock" value="{{ old('stock', 0) }}"
+                <input type="number" name="stock" value="{{ old('stock', 0) }}" min="0"
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">Minimal Stok (Stok Menipis)</label>
+                <input type="number" name="min_stock" value="{{ old('min_stock', 0) }}" min="0"
+                    placeholder="Contoh: 5"
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
+                <small class="text-gray-500">
+                    Jika stok <= minimal stok, produk dianggap menipis. </small>
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">Harga</label>
+                <input type="number" step="0.01" name="price" value="{{ old('price', 0) }}" min="0"
+                    placeholder="Contoh: 15000"
                     class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
             </div>
 

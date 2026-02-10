@@ -41,6 +41,11 @@
                 <input type="number" name="stock" value="{{ old('stock', $product->stock) }}"
                     class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
             </div>
+            <div>
+                <label class="block font-medium mb-1">Miniman Stok</label>
+                <input type="number" name="min_stock" value="{{ old('stock', $product->min_stock) }}"
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-400">
+            </div>
 
             <div class="flex gap-2">
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
