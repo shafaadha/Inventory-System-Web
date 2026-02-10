@@ -19,7 +19,7 @@
 
         <div class="p-6 h-full flex flex-col">
             <!-- Header -->
-            <h1 class="text-2xl font-bold mb-6">My Sidebar</h1>
+            <h1 class="text-2xl font-bold mb-6">inventory App</h1>
 
             <!-- Menu -->
             <ul class="flex-1 flex flex-col">
