@@ -8,18 +8,21 @@
     <title>{{ $title ?? 'Dashboard' }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="bg-gray-100 flex">
 
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="fixed top-0 left-0 h-screen w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:relative md:shadow-none">
-        <div class="p-6">
+        class="sticky top-0 w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:relative md:shadow-none min-h-screen">
+
+        <div class="p-6 h-full flex flex-col">
+            <!-- Header -->
             <h1 class="text-2xl font-bold mb-6">My Sidebar</h1>
-            <ul>
+
+            <!-- Menu -->
+            <ul class="flex-1 flex flex-col">
                 <li class="mb-4">
                     <a href="{{ route('dashboard') }}"
                         class="{{ request()->routeIs('dashboard') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
@@ -30,21 +33,43 @@
                 <li class="mb-4">
                     <a href="{{ route('products.index') }}"
                         class="{{ request()->routeIs('products.*') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
-                        Products
+                        Master Products
                     </a>
                 </li>
 
                 <li class="mb-4">
-                    <a href="{{ route('transaction.index') }}"
-                        class="{{ request()->routeIs('transaction.*') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
-                        Transaction
+                    <a href="{{ route('stock_in.index') }}"
+                        class="{{ request()->routeIs('stock_in.*') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
+                        Penerimaan Barang
+                    </a>
+                </li>
+
+                <li class="mb-4">
+                    <a href="{{ route('stock_out.index') }}"
+                        class="{{ request()->routeIs('stock_out.*') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
+                        Pengeluaran Barang
+                    </a>
+                </li>
+
+                <li class="mb-4">
+                    <a href="{{ route('report.stock') }}"
+                        class="{{ request()->routeIs('report.stock') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
+                        Laporan Stok
+                    </a>
+                </li>
+
+                <li class="mb-4">
+                    <a href="{{ route('report.transaction') }}"
+                        class="{{ request()->routeIs('report.transaction') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
+                        Laporan Transaksi
                     </a>
                 </li>
 
                 <li class="mt-auto pt-4 border-t border-gray-200">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="text-gray-700 hover:text-red-500">
+                        <button type="submit"
+                            class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 rounded-lg transition">
                             Logout
                         </button>
                     </form>
@@ -52,6 +77,7 @@
             </ul>
         </div>
     </aside>
+
 
     <!-- Main content -->
     <div class="flex-1 md:ml-10 min-h-screen">
@@ -72,15 +98,18 @@
         </div>
     </div>
 
-    <script>
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('toggleSidebar');
+    <script src="https://kit.fontawesome.com/8b572ffabd.js" crossorigin="anonymous"></script>
 
-        toggleBtn?.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-            sidebar.classList.toggle('translate-x-0');
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const toggleBtn = document.getElementById("toggleSidebar");
+
+        toggleBtn?.addEventListener("click", () => {
+            sidebar.classList.toggle("-translate-x-full");
+            sidebar.classList.toggle("translate-x-0");
         });
     </script>
+
 </body>
 
 </html>
