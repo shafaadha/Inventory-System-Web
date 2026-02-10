@@ -12,8 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(10);
         $title = 'Products';
+        $products = Product::latest()->paginate(10);
         return view('products.index', compact('products', 'title'));
     }
 
@@ -31,18 +31,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'code' => 'required|unique:products,code|max:255',
-            'name' => 'required|max:255',
-            'unit' => 'required|max:50',
-            'stock' => 'nullable|integer|min:0'
+        $validated = $request->validate([
+            'code' => 'required|string|max:255|unique:products,code',
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'unit' => 'required|string|max:50',
+            'stock' => 'nullable|integer|min:0',
+            'min_stock' => 'nullable|integer|min:0',
+            'price' => 'nullable|numeric|min:0',
         ]);
 
         Product::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'unit' => $request->unit,
-            'stock' => $request->stock ?? 0,
+            'code' => $validated['code'],
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'unit' => $validated['unit'],
+            'stock' => $validated['stock'] ?? 0,
+            'min_stock' => $validated['min_stock'] ?? 0,
+            'price' => $validated['price'] ?? 0,
         ]);
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan!');
@@ -51,7 +57,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $products)
+    public function show(Product $product)
     {
         $title = 'Product';
         return view('products.show', compact('product', 'title'));
@@ -71,19 +77,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $request->validate([
-            'code' => 'required|max:255|unique:products,code,' . $product->id,
-            'name' => 'required|max:255',
-            'unit' => 'required|max:50',
-            'stock' => 'nullable|integer|min:0'
+        $validated = $request->validate([
+            'code' => 'required|string|max:255|unique:products,code,' . $product->id,
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'unit' => 'required|string|max:50',
+            'stock' => 'nullable|integer|min:0',
+            'min_stock' => 'nullable|integer|min:0',
+            'price' => 'nullable|numeric|min:0',
         ]);
 
-        $product->update([
-            'code' => $request->code,
-            'name' => $request->name,
-            'unit' => $request->unit,
-            'stock' => $request->stock ?? 0,
-        ]);
+        $product->update($validated);
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil diupdate!');
     }
