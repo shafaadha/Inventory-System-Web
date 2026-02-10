@@ -16,10 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
-            $table->integer('stock')-> default(0);
+            $table->text('description')->nullable();
+            $table->integer('stock')->default(0);
+            $table->integer('min_stock')->default(0);
             $table->string('unit', 50);
+            $table->decimal('price', 15, 2)->default(0);
             $table->timestamps();
-
         });
     }
 

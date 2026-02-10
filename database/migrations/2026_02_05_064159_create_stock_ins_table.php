@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('stock_ins', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->string('reference_no')->nullable();
             $table->integer('qty');
             $table->date('date');
             $table->text('note')->nullable();

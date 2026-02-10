@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class StockIn extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_id', 'qty', 'date', 'note'];
+    protected $fillable = ['product_id', 'qty', 'reference_no', 'date', 'note'];
 
     public function product()
     {

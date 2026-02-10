@@ -11,15 +11,20 @@ class Product extends Model
     protected $fillable = [
         'code',
         'name',
+        'description',
         'stock',
-        'unit'
+        'min_stock',
+        'unit',
+        'price',
     ];
 
-    public function stockIn(){
+    public function stockIn()
+    {
         return $this->hasMany(StockIn::class);
     }
 
-    public function stockOur(){
+    public function stockOur()
+    {
         return $this->hasMany(StockOut::class);
     }
 }
