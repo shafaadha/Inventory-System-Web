@@ -21,7 +21,7 @@ class RoleMiddleware
         }
 
         if (!in_array(auth()->user()->role, $roles)) {
-            return response()->view('errors.unauthorized', [], 403);
+            return response()->view('error.unauthorized', [], 403);
         }
 
         return $next($request);
