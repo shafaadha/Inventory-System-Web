@@ -15,14 +15,14 @@
 
     <!-- Sidebar -->
     <aside id="sidebar"
-        class="sticky top-0 w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:relative md:shadow-none min-h-screen">
+        class="fixed top-0 left-0 w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:shadow-none h-screen">
 
         <div class="p-6 h-full flex flex-col">
             <!-- Header -->
-            <h1 class="text-2xl font-bold mb-6">inventory App</h1>
+            <h1 class="text-2xl font-bold mb-6">Inventory App</h1>
 
             <!-- Menu -->
-            <ul class="flex-1 flex flex-col">
+            <ul class="flex-1 flex flex-col overflow-y-auto">
                 <li class="mb-4">
                     <a href="{{ route('dashboard') }}"
                         class="{{ request()->routeIs('dashboard') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
@@ -30,12 +30,14 @@
                     </a>
                 </li>
 
-                <li class="mb-4">
-                    <a href="{{ route('products.index') }}"
-                        class="{{ request()->routeIs('products.*') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
-                        Master Products
-                    </a>
-                </li>
+                @role('admin')
+                    <li class="mb-4">
+                        <a href="{{ route('products.index') }}"
+                            class="{{ request()->routeIs('products.*') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
+                            Master Products
+                        </a>
+                    </li>
+                @endrole
 
                 <li class="mb-4">
                     <a href="{{ route('stock_in.index') }}"
@@ -51,19 +53,23 @@
                     </a>
                 </li>
 
-                <li class="mb-4">
-                    <a href="{{ route('report.stock') }}"
-                        class="{{ request()->routeIs('report.stock') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
-                        Laporan Stok
-                    </a>
-                </li>
+                @role('admin')
+                    <li class="mb-4">
+                        <a href="{{ route('report.stock') }}"
+                            class="{{ request()->routeIs('report.stock') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
+                            Laporan Stok
+                        </a>
+                    </li>
+                @endrole
 
-                <li class="mb-4">
-                    <a href="{{ route('report.transaction') }}"
-                        class="{{ request()->routeIs('report.transaction') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
-                        Laporan Transaksi
-                    </a>
-                </li>
+                @role('admin')
+                    <li class="mb-4">
+                        <a href="{{ route('report.transaction') }}"
+                            class="{{ request()->routeIs('report.transaction') ? 'font-semibold text-blue-600' : 'text-gray-700' }}">
+                            Laporan Transaksi
+                        </a>
+                    </li>
+                @endrole
 
                 <li class="mt-auto pt-4 border-t border-gray-200">
                     <form action="{{ route('logout') }}" method="POST">
@@ -80,7 +86,7 @@
 
 
     <!-- Main content -->
-    <div class="flex-1 md:ml-10 min-h-screen">
+    <div class="flex-1 md:ml-64 min-h-screen">
         <!-- Navbar Mobile -->
         <nav class="flex items-center justify-between bg-white p-4 shadow-md md:hidden">
             <button id="toggleSidebar" class="text-gray-700 focus:outline-none">
